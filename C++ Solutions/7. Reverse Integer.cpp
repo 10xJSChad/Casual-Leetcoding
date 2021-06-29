@@ -2,6 +2,8 @@
 #include <sstream>
 #include <string> 
 
+class Solution {
+public:
 int reverse(int x) {
     std::string reversed;
     std::string s = std::to_string(x);
@@ -17,7 +19,9 @@ int reverse(int x) {
     intValue >> x;
 
     if (isNegative) { x *= -1; }
+    
     if (x >= 2147483647) { x = 0; }
-    if (x <= -2147483648) { x = 0; }
+    if (x <= -2147483647) { x = 0; }
     return x;
 }
+};
