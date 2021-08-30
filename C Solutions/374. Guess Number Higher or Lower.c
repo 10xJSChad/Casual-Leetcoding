@@ -8,5 +8,5 @@ int guessNumber(int n){
         else if(result == 1) min = mid + 1;
         else return mid;
     }
-	return min;
+    return min;
 }
