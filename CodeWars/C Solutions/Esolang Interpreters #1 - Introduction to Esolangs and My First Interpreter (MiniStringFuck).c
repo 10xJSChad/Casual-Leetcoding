@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
-char *my_first_interpreter (const char *code)
-{
+char *my_first_interpreter (const char *code){
   int cell = 0;
   int i = 0;
   int j = 0;
@@ -15,5 +14,5 @@ char *my_first_interpreter (const char *code)
     i++;
     output[j] = '\0';
   }
-  return output;
+  return(output);
 }
