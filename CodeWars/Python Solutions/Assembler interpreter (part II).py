@@ -7,20 +7,29 @@ class interpreter:
             IDX = LABEL[args['x']]
             
         def msg(line):
-            #inefficiency time
+            #this function is really, really, REALLY bad
             global OUTPUT
-            in_string, comma = False, False
+            in_string, comma = False, True
             built_line = ""
-            for char in line:
-                if char == '\'': 
+            
+            for char in line[3:].strip():
+                print(built_line)
+                if char == '\'':
                     in_string = not in_string
                     comma = False if comma else comma
                 if in_string and char != '\'': built_line += char    
                 if not in_string and char == ',': comma = True
-                if not in_string and char.isalpha() and comma:
-                    built_line += str(REG[char])
-                    comma = False
+                if not in_string and comma:
+                    if char.isalpha(): 
+                        if char in REG:
+                            built_line += str(REG[char])
+                            comma = False
+                    if char.isnumeric(): 
+                        built_line += char
+                        comma = False
+            
             OUTPUT = built_line
+            print(OUTPUT)
             
         def ret():
             global IDX
@@ -88,7 +97,7 @@ class interpreter:
                 else: instruction['func'](line)
                 
                 if END: return OUTPUT
-            if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK, REG)
+            #if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK, REG)
             IDX += 1
         return OUTPUT
     
@@ -110,13 +119,17 @@ INST = {
     'msg': {'func': interpreter.instructions.msg, 'args': -1, 'clean': False},
 } 
 LABEL = {}
+CMP = {}
 RET_STACK = []
 END = False
 OUTPUT = ""
+EXECUTION = 0
 
 def assembler_interpreter(program):
-    global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT
-    IDX = 0 ; REG, LABEL = {}, {}; RET_STACK = []; END = False; OUTPUT = ""
-    if len(LABEL) != 0: return
+    global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT, EXECUTION
+    #if OUTPUT != "": return
+    EXECUTION += 1
+    if EXECUTION >= 3: return
+    IDX = 0 ; REG, LABEL, CMP = {}, {}, {}; RET_STACK = []; END = False; OUTPUT = ""
     #return interpreter.interperet(["mov a, 500", "dec a", "mov b, 50"])
     return interpreter.interperet([line for line in program.split('\n')])
