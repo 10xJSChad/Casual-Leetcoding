@@ -1,11 +1,7 @@
 class interpreter:
     class instructions:      
-        #interpreter.instructions methods will be very straightforward, little care for safety here :)   
-        def call(args):
-            global IDX
-            RET_STACK.append(IDX)
-            IDX = LABEL[args['x']]
-            
+        #interpreter.instructions methods will for the most part be very straightforward, little care for safety here :)   
+        
         def msg(line):
             #this function is really, really, REALLY bad
             global OUTPUT
@@ -13,7 +9,6 @@ class interpreter:
             built_line = ""
             
             for char in line[3:].strip():
-                print(built_line)
                 if char == '\'':
                     in_string = not in_string
                     comma = False if comma else comma
@@ -26,10 +21,42 @@ class interpreter:
                             comma = False
                     if char.isnumeric(): 
                         built_line += char
-                        comma = False
-            
+                        comma = False   
+                        
             OUTPUT = built_line
-            print(OUTPUT)
+
+            
+        def jmp(args):
+            global IDX
+            IDX = LABEL[args['x']]
+          
+        def cmp(args):
+            global CMP
+            if str(args['x']).isalpha(): CMP['x'] = REG[args['x']]
+            if str(args['y']).isalpha(): CMP['y'] = REG[args['y']]
+                                                         
+        def jne(args):
+            print(args)
+        
+        def je(args):
+            pass
+        
+        def jge(args):
+            pass
+        
+        def jg(args):
+            pass
+        
+        def jle(args):
+            pass
+        
+        def jl(args):
+            pass
+            
+        def call(args):
+            global IDX
+            RET_STACK.append(IDX)
+            IDX = LABEL[args['x']]
             
         def ret():
             global IDX
@@ -117,9 +144,20 @@ INST = {
     'ret': {'func': interpreter.instructions.ret, 'args': 0, 'clean': True},
     'end': {'func': interpreter.instructions.end, 'args': 0, 'clean': True},
     'msg': {'func': interpreter.instructions.msg, 'args': -1, 'clean': False},
+    'cmp': {'func': interpreter.instructions.cmp, 'args': 2, 'clean': True},
+    'jmp': {'func': interpreter.instructions.jmp, 'args': 1, 'clean': True},
+    'jne': {'func': interpreter.instructions.jne, 'args': 1, 'clean': True},
+    'je': {'func': interpreter.instructions.je, 'args': 1, 'clean': True},
+    'jge': {'func': interpreter.instructions.jge, 'args': 1, 'clean': True},
+    'jg': {'func': interpreter.instructions.jg, 'args': 1, 'clean': True},
+    'jle': {'func': interpreter.instructions.jle, 'args': 1, 'clean': True},
+    'jl': {'func': interpreter.instructions.jl, 'args': 1, 'clean': True},
 } 
 LABEL = {}
-CMP = {}
+CMP = {
+    'x': 0,
+    'y': 0,
+}
 RET_STACK = []
 END = False
 OUTPUT = ""
