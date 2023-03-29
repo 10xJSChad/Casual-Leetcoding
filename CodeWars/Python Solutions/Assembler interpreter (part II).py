@@ -1,7 +1,6 @@
 class interpreter:
     class instructions:      
-        #interpreter.instructions methods will for the most part be very straightforward, little care for safety here :)   
-        
+        #interpreter.instructions methods will for the most part be very straightforward, little care for safety here :)           
         def msg(line):
             #this function is really, really, REALLY bad
             global OUTPUT
