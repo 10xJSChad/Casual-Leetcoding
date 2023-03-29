@@ -31,27 +31,15 @@ class interpreter:
             IDX = LABEL[args['x']]
           
         def cmp(args):
-            global CMP
-            if str(args['x']).isalpha(): CMP['x'] = REG[args['x']]
-            if str(args['y']).isalpha(): CMP['y'] = REG[args['y']]
+            CMP['x'] = args['x'] if str(args['x']).isnumeric() else REG[args['x']] 
+            CMP['y'] = args['y'] if str(args['y']).isnumeric() else REG[args['y']] 
                                                          
-        def jne(args):
-            print(args)
-        
-        def je(args):
-            pass
-        
-        def jge(args):
-            pass
-        
-        def jg(args):
-            pass
-        
-        def jle(args):
-            pass
-        
-        def jl(args):
-            pass
+        def jne(args): interpreter.instructions.jmp(args) if CMP['x'] != CMP['y'] else None    
+        def je(args):  interpreter.instructions.jmp(args) if CMP['x'] == CMP['y'] else None     
+        def jge(args): interpreter.instructions.jmp(args) if CMP['x'] >= CMP['y'] else None       
+        def jg(args):  interpreter.instructions.jmp(args) if CMP['x'] > CMP['y'] else None     
+        def jle(args): interpreter.instructions.jmp(args) if CMP['x'] <= CMP['y'] else None       
+        def jl(args):  interpreter.instructions.jmp(args) if CMP['x'] < CMP['y'] else None 
             
         def call(args):
             global IDX
@@ -90,8 +78,8 @@ class interpreter:
         
         def parse_arguments(line, arg_count):
             split_args = [int(arg) if arg.isnumeric() else arg for arg in line.replace(",", "").split()[1:]]
-            parsed_args = {
-            }
+            
+            parsed_args = {}
             parsed_args['x'] = split_args[0] if arg_count > 0 else None      
             parsed_args['y'] = split_args[1] if arg_count > 1 else None            
             return parsed_args
@@ -124,13 +112,15 @@ class interpreter:
                 else: instruction['func'](line)
                 
                 if END: return OUTPUT
-            #if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK, REG)
             IDX += 1
-        return OUTPUT
+        return -1
     
 
 
+#Why do I do it this way?
+#Because I like it :)
 IDX = 0
+END = False
 REG = {}
 INST = {
     'mov': {'func': interpreter.instructions.mov, 'args': 2, 'clean': True},
@@ -153,21 +143,15 @@ INST = {
     'jle': {'func': interpreter.instructions.jle, 'args': 1, 'clean': True},
     'jl': {'func': interpreter.instructions.jl, 'args': 1, 'clean': True},
 } 
-LABEL = {}
 CMP = {
     'x': 0,
     'y': 0,
 }
+LABEL = {}
 RET_STACK = []
-END = False
 OUTPUT = ""
-EXECUTION = 0
 
 def assembler_interpreter(program):
-    global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT, EXECUTION
-    #if OUTPUT != "": return
-    EXECUTION += 1
-    if EXECUTION >= 3: return
+    global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT
     IDX = 0 ; REG, LABEL, CMP = {}, {}, {}; RET_STACK = []; END = False; OUTPUT = ""
-    #return interpreter.interperet(["mov a, 500", "dec a", "mov b, 50"])
     return interpreter.interperet([line for line in program.split('\n')])
