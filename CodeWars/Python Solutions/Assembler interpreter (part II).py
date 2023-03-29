@@ -24,7 +24,6 @@ class interpreter:
                         comma = False   
                         
             OUTPUT = built_line
-
             
         def jmp(args):
             global IDX
@@ -70,8 +69,7 @@ class interpreter:
         def div(args): 
             REG[args['x']] /= REG[args['y']] if isinstance(args['y'], str) else args['y']
             REG[args['x']] = int(REG[args['x']])
-        
-        
+            
     class utility:
         def clean_line(line):
             return " ".join(line.split()).split(";")[0]
@@ -95,8 +93,7 @@ class interpreter:
             for i, line in enumerate(code):
                 split_line = line.strip().split(":")
                 label_name = split_line[0] if len(split_line) == 2 and split_line[0].count(" ") == 0 else None
-                if label_name: LABEL[label_name] = i
-        
+                if label_name: LABEL[label_name] = i       
         
     def interperet(code):
         global IDX
@@ -115,8 +112,6 @@ class interpreter:
             IDX += 1
         return -1
     
-
-
 #Why do I do it this way?
 #Because I like it :)
 IDX = 0
