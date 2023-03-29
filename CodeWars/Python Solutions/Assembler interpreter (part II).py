@@ -6,9 +6,25 @@ class interpreter:
             RET_STACK.append(IDX)
             IDX = LABEL[args['x']]
             
+        def msg(line):
+            #inefficiency time
+            global OUTPUT
+            in_string, comma = False, False
+            built_line = ""
+            for char in line:
+                if char == '\'': 
+                    in_string = not in_string
+                    comma = False if comma else comma
+                if in_string and char != '\'': built_line += char    
+                if not in_string and char == ',': comma = True
+                if not in_string and char.isalpha() and comma:
+                    built_line += str(REG[char])
+                    comma = False
+            OUTPUT = built_line
+            
         def ret():
             global IDX
-            IDX = RET_STACK[0]+1
+            IDX = RET_STACK[0]
             RET_STACK.pop(0)
             
         def mov(args):
@@ -61,16 +77,20 @@ class interpreter:
     def interperet(code):
         global IDX
         interpreter.utility.get_labels_and_fill_dict(code)
-        while IDX < len(code) and IDX > -1:
+        while IDX < len(code):
             instruction = interpreter.utility.get_instruction(code[IDX])
             if instruction:
                 line = interpreter.utility.clean_line(code[IDX]) if instruction['clean'] else code[IDX]
                 args = interpreter.utility.parse_arguments(line, instruction['args'])
-                instruction['func'](args) if instruction['args'] > 0 else instruction['func']()
-                if END: return ""
-            if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK)
+                
+                if instruction['args'] > 0: instruction['func'](args)
+                elif instruction['args'] == 0: instruction['func']()
+                else: instruction['func'](line)
+                
+                if END: return OUTPUT
+            if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK, REG)
             IDX += 1
-        return ""
+        return OUTPUT
     
 
 
@@ -85,13 +105,16 @@ INST = {
     'call': {'func': interpreter.instructions.call, 'args': 1, 'clean': True},
     'ret': {'func': interpreter.instructions.ret, 'args': 0, 'clean': True},
     'end': {'func': interpreter.instructions.end, 'args': 0, 'clean': True},
+    'msg': {'func': interpreter.instructions.msg, 'args': -1, 'clean': False},
 } 
 LABEL = {}
 RET_STACK = []
 END = False
+OUTPUT = ""
 
 def assembler_interpreter(program):
-    global IDX, REG
+    global IDX, REG, LABEL
     IDX, REG = 0, {}
+    if len(LABEL) != 0: return
     #return interpreter.interperet(["mov a, 500", "dec a", "mov b, 50"])
     return interpreter.interperet([line for line in program.split('\n')])
