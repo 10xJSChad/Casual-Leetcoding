@@ -12,8 +12,7 @@ def validate_battlefield(field):
         
         scanned_grid.append(str(field) + str([[field[i][j] for 
     i, row in enumerate(field)] for j in list(range(0, 10))]))
-    
-    
+     
     search = lambda a : str(scanned_grid[1]).count(str([1 for x in range(a)])[1:-1])
     return(list(map(search, [1, 2, 3, 4])) == [40, 7, 3, 1] and 
                         not str(scanned_grid[0]).count("1, 1"))
