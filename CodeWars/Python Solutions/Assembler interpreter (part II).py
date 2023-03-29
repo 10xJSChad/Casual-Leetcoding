@@ -102,6 +102,8 @@ INST = {
     'dec': {'func': interpreter.instructions.dec, 'args': 1, 'clean': True},
     'add': {'func': interpreter.instructions.add, 'args': 2, 'clean': True},
     'sub': {'func': interpreter.instructions.sub, 'args': 2, 'clean': True},
+    'mul': {'func': interpreter.instructions.mul, 'args': 2, 'clean': True},
+    'div': {'func': interpreter.instructions.div, 'args': 2, 'clean': True},
     'call': {'func': interpreter.instructions.call, 'args': 1, 'clean': True},
     'ret': {'func': interpreter.instructions.ret, 'args': 0, 'clean': True},
     'end': {'func': interpreter.instructions.end, 'args': 0, 'clean': True},
@@ -113,8 +115,8 @@ END = False
 OUTPUT = ""
 
 def assembler_interpreter(program):
-    global IDX, REG, LABEL
-    IDX, REG = 0, {}
+    global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT
+    IDX = 0 ; REG, LABEL = {}, {}; RET_STACK = []; END = False; OUTPUT = ""
     if len(LABEL) != 0: return
     #return interpreter.interperet(["mov a, 500", "dec a", "mov b, 50"])
     return interpreter.interperet([line for line in program.split('\n')])
