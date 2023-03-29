@@ -7,8 +7,8 @@ def validate_battlefield(field):
                           [j, 9-i+j], [j, i-j]]]
             
         scanned_grid[0].append([[get_val(coords[(int((k * 4) / 4) + (4 * l))]) for 
-                k in range(4) for l in range(int(len(coords) / 4))][j:j + i+1] 
-                                         for j in range(0, (i + 1) * 4, i+1)])
+                k in range(4) for l in range(int(len(coords) / 4))][j:j + i+1] for 
+                                                 j in range(0, (i + 1) * 4, i+1)])
         
         scanned_grid.append(str(field) + str([[field[i][j] for 
     i, row in enumerate(field)] for j in list(range(0, 10))]))
