@@ -7,13 +7,19 @@ class interpreter:
             IDX = LABEL[args['x']]
             
         def ret():
-            print("TAKE ME HOME")
+            global IDX
+            IDX = RET_STACK[0]+1
+            RET_STACK.pop(0)
             
         def mov(args):
             if not isinstance(args['x'], str): return
             val_in = REG[args['y']] if isinstance(args['y'], str) else args['y']
             REG[args['x']] = val_in
         
+        def end():
+            global END
+            END = True
+            
         def inc(args): REG[args['x']] += 1
         def dec(args): REG[args['x']] -= 1
         def add(args): REG[args['x']] += REG[args['y']] if isinstance(args['y'], str) else args['y']
@@ -55,13 +61,14 @@ class interpreter:
     def interperet(code):
         global IDX
         interpreter.utility.get_labels_and_fill_dict(code)
-        while IDX < len(code):
+        while IDX < len(code) and IDX > -1:
             instruction = interpreter.utility.get_instruction(code[IDX])
             if instruction:
                 line = interpreter.utility.clean_line(code[IDX]) if instruction['clean'] else code[IDX]
                 args = interpreter.utility.parse_arguments(line, instruction['args'])
                 instruction['func'](args) if instruction['args'] > 0 else instruction['func']()
-            #if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), REG)
+                if END: return ""
+            if interpreter.utility.clean_line(code[IDX]) != '': print(interpreter.utility.clean_line(code[IDX]), IDX, RET_STACK)
             IDX += 1
         return ""
     
@@ -77,9 +84,11 @@ INST = {
     'sub': {'func': interpreter.instructions.sub, 'args': 2, 'clean': True},
     'call': {'func': interpreter.instructions.call, 'args': 1, 'clean': True},
     'ret': {'func': interpreter.instructions.ret, 'args': 0, 'clean': True},
+    'end': {'func': interpreter.instructions.end, 'args': 0, 'clean': True},
 } 
 LABEL = {}
 RET_STACK = []
+END = False
 
 def assembler_interpreter(program):
     global IDX, REG
