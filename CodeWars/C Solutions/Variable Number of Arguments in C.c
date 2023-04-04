@@ -17,7 +17,5 @@ int n_sum(int a, int b, int c, int d, int e, int f){
     i--;
   };
 
-  __asm__("mov sum, %eax");
-  __asm__("popq %rbp");
-  __asm__("retq");
+  return(sum);
 }
