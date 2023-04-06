@@ -95,7 +95,7 @@ class interpreter:
                 label_name = split_line[0] if len(split_line) == 2 and split_line[0].count(" ") == 0 else None
                 if label_name: LABEL[label_name] = i       
         
-    def interperet(code):
+    def interpret(code):
         global IDX
         interpreter.utility.get_labels_and_fill_dict(code)
         while IDX < len(code):
@@ -149,4 +149,4 @@ OUTPUT = ""
 def assembler_interpreter(program):
     global IDX, REG, INST, LABEL, RET_STACK, END, OUTPUT
     IDX = 0 ; REG, LABEL, CMP = {}, {}, {}; RET_STACK = []; END = False; OUTPUT = ""
-    return interpreter.interperet([line for line in program.split('\n')])
+    return interpreter.interpret([line for line in program.split('\n')])
