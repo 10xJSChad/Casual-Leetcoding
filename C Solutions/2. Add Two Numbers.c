@@ -5,7 +5,8 @@
  *     struct ListNode *next;
  * };
  */
-
+ 
+ // Inserts an empty node into insertion_point_node->next;
 inline void insert_node(struct ListNode* insertion_point_node)
 {
     struct ListNode *new_node = (struct ListNode*) malloc(
@@ -17,7 +18,7 @@ inline void insert_node(struct ListNode* insertion_point_node)
     insertion_point_node->next = new_node;
 }
 
-inline void perform_addition(struct ListNode* curr_node_a, 
+inline void perform_addition(struct ListNode* node_a, 
                              int num_a, int num_b)
 {
     int carry_over = 0;
@@ -25,35 +26,33 @@ inline void perform_addition(struct ListNode* curr_node_a,
 
     if(sum > 9){
         carry_over = 1;
-        curr_node_a->val = sum - 10;
+        node_a->val = sum - 10;
 
-        if(!curr_node_a->next)
-            insert_node(curr_node_a);
+        if(!node_a->next)
+            insert_node(node_a);
             
-        perform_addition(curr_node_a->next, 
-                         curr_node_a->next->val, carry_over);
+        perform_addition(node_a->next, 
+                         node_a->next->val, carry_over);
     }else{
-        curr_node_a->val = sum;
+        node_a->val = sum;
     }
 }
 
-struct ListNode* addTwoNumbers(struct ListNode* list_a, 
-                               struct ListNode* list_b)
+struct ListNode* addTwoNumbers(struct ListNode* node_a, 
+                               struct ListNode* node_b)
 {
-    struct ListNode* curr_node_a = list_a;
-    struct ListNode* curr_node_b = list_b;
+    struct ListNode* list_a_head = node_a;
     
-    int carry_over = 0;
-    while(curr_node_b){
-        perform_addition(curr_node_a, curr_node_a->val, 
-                         curr_node_b->val);
+    while(node_b){
+        perform_addition(node_a, node_a->val, 
+                         node_b->val);
 
-        if(!curr_node_a->next && curr_node_b->next)
-            insert_node(curr_node_a);
+        if(!node_a->next && node_b->next)
+            insert_node(node_a);
 
-        curr_node_a = curr_node_a->next;
-        curr_node_b = curr_node_b->next;
+        node_a = node_a->next;
+        node_b = node_b->next;
     }
     
-    return(list_a);
+    return(list_a_head);
 }
