@@ -21,7 +21,7 @@ inline void insert_after(struct ListNode* node_a,
 
 
 // Inserts node_b before node_a
-void insert_before(struct ListNode** node_a,
+inline void insert_before(struct ListNode** node_a,
                    struct ListNode* node_b)
 {
 
