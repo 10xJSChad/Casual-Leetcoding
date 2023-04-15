@@ -57,7 +57,9 @@ inline void insert_sorted(struct ListNode** list_a,
             insert_after(*list_a, list_b);
             return;
         }
+      
         *list_a = (*list_a)->next;
+      
     }
 
 }
