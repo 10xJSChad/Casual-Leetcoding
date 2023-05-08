@@ -1,5 +1,5 @@
 struct ListNode* 
-middleNode (
+middleNode(
     struct ListNode* head)
 {
     struct ListNode* fast = head;

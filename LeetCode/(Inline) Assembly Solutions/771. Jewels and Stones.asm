@@ -1,7 +1,7 @@
 ; Nested loops, would have preferred to do it any other way
 ; but I'm not about to implement a hashmap/dictionary in assembly
 
-__attribute__((naked)) int numJewelsInStones (
+__attribute__((naked)) int numJewelsInStones(
     char * jewels,       ; rdi
     char * stones)       ; rsi
 {

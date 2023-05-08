@@ -1,5 +1,5 @@
 int 
-findMaxConsecutiveOnes (
+findMaxConsecutiveOnes(
     int* nums, int numsSize)
 {
     int max = 0;

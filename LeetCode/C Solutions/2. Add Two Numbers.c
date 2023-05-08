@@ -1,6 +1,6 @@
 inline 
 void 
-insert_node (
+insert_node(
     struct ListNode* insertion_point_node)
 {
     struct ListNode *new_node = (struct ListNode*) malloc(

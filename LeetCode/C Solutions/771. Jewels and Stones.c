@@ -1,5 +1,5 @@
 int
-numJewelsInStones (
+numJewelsInStones(
     char* jewels,
     char* stones)
 {

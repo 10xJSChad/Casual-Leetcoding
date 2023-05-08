@@ -1,13 +1,14 @@
 int 
-comparator (
+comparator(
     int* a, 
     int* b)
 {
   return *a - *b;
 }
 
+
 int 
-numRescueBoats (
+numRescueBoats(
     int* people, 
     int peopleSize, 
     int limit)

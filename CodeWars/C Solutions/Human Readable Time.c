@@ -1,5 +1,5 @@
 char 
-*human_readable_time (
+*human_readable_time(
   long n, 
   char *time_string)
 {

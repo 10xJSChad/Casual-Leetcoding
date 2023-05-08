@@ -1,5 +1,5 @@
 char*
-my_first_interpreter (
+my_first_interpreter(
   const char *code)
 {
   int i = 0, j = 0, cell = 0;

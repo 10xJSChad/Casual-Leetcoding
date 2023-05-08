@@ -1,4 +1,4 @@
-__attribute__((naked)) int* runningSum (
+__attribute__((naked)) int* runningSum(
     int* nums,       rdi
     int numsSize,    rsi
     int* returnSize) rdx

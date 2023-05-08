@@ -1,5 +1,5 @@
 int 
-guessNumber (
+guessNumber(
     int n)
 {
     long min = 1;

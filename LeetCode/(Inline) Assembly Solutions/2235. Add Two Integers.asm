@@ -1,4 +1,4 @@
-__attribute__((naked)) int sum (
+__attribute__((naked)) int sum(
     int num1, 
     int num2)
 {

@@ -18,7 +18,7 @@ typedef struct Dict {
 
 inline
 DictNode*
-DictNode_Create (
+DictNode_Create(
         int key,
         int val)
 {
@@ -32,7 +32,7 @@ DictNode_Create (
 
 inline
 void
-DictNode_Append (
+DictNode_Append(
         DictNode* head,
         DictNode* node)
 {
@@ -47,7 +47,7 @@ DictNode_Append (
 
 inline
 void
-DictNode_DestroyList (
+DictNode_DestroyList(
         DictNode* head)
 {
     DictNode* prev;
@@ -62,7 +62,7 @@ DictNode_DestroyList (
 
 inline
 Dict
-Dict_Create (
+Dict_Create(
         int elements)
 {
     int created_dict_size = 2;
@@ -79,7 +79,7 @@ Dict_Create (
 
 inline
 void
-Dict_Add (
+Dict_Add(
         Dict dict,
         int key,
         int val)
@@ -95,7 +95,7 @@ Dict_Add (
 
 inline
 DictNode*
-Dict_GetKeyDictNode (
+Dict_GetKeyDictNode(
         Dict dict,
         int key)
 {
@@ -111,7 +111,7 @@ Dict_GetKeyDictNode (
 
 inline
 int
-Dict_Get (
+Dict_Get(
         Dict dict,
         int key)
 {
@@ -121,7 +121,7 @@ Dict_Get (
 
 inline
 void
-Dict_Destroy (
+Dict_Destroy(
         Dict dict)
 {
     for (int i = 0; i < dict.size; ++i)
@@ -131,7 +131,7 @@ Dict_Destroy (
 
 
 int* 
-twoSum (
+twoSum(
     int* nums,
     int numsSize,
     int target,

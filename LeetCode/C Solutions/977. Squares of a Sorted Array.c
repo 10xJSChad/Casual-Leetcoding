@@ -1,5 +1,5 @@
 int 
-comparator (
+comparator(
     int* a, 
     int* b)
 {
@@ -8,7 +8,7 @@ comparator (
 
 
 int* 
-sortedSquares (
+sortedSquares(
     int* nums, 
     int numsSize, 
     int* returnSize)

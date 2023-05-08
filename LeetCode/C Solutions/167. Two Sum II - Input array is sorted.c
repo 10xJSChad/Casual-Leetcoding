@@ -1,5 +1,5 @@
 int* 
-twoSum (
+twoSum(
     int* nums,
     int numsSize,
     int target,
@@ -9,7 +9,7 @@ twoSum (
     int left = 0;
     int right = numsSize - 1;
 
-    while(true) {
+    while (true) {
         int sum = nums[left] + nums[right];
         
         if (sum == target) {

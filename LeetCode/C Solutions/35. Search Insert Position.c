@@ -1,5 +1,5 @@
 int 
-searchInsert (
+searchInsert(
     int* nums, 
     int numsSize, 
     int target)

@@ -1,5 +1,5 @@
 int*
-getConcatenation (
+getConcatenation(
     int* nums, 
     int numsSize, 
     int* returnSize)
