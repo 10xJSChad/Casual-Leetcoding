@@ -1,5 +1,5 @@
 int
-lengthOfLastWord(
+lengthOfLastWord (
     char* s)
 {
     int prev_space_index = 0;    
