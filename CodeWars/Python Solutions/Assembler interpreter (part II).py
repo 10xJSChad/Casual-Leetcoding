@@ -1,9 +1,6 @@
 class interpreter:
     class instructions:      
-        #interpreter.instructions methods will for the most part be very straightforward, little care for safety here :)  
-        
         def msg(line):
-            #this function is really, really, REALLY bad
             global OUTPUT
             in_string, comma = False, True
             built_line = ""
@@ -112,8 +109,7 @@ class interpreter:
             IDX += 1
         return -1
     
-#Why do I do it this way?
-#Because I like it :)
+
 IDX = 0
 END = False
 REG = {}

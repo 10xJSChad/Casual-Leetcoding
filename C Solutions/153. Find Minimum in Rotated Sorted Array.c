@@ -1,19 +1,22 @@
-int findMin(int* nums, int numsSize){
+int 
+findMin(
+    int* nums, 
+    int numsSize)
+{
     int left = 0;
     int right = numsSize - 1;
     
-    while(left < right) {
+    while (left < right) {
         int mid = (left + right) / 2;
         
-        if(nums[left] < nums[right]) 
+        if (nums[left] < nums[right]) 
             return nums[left];
         
-        if(nums[mid] > nums[right])
+        if (nums[mid] > nums[right])
             left = mid + 1;
         else
             right = mid;
     }
     
     return nums[left];
-    
 }

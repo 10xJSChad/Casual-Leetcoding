@@ -1,20 +1,22 @@
-int* sortedSquares(int* nums, int numsSize, int* returnSize){
-    *returnSize = numsSize;
-    
-    for(int i = 0; i<numsSize; i++){
+int 
+comparator (
+    int* a, 
+    int* b)
+{
+  return *a - *b;
+}
+
+
+int* 
+sortedSquares (
+    int* nums, 
+    int numsSize, 
+    int* returnSize)
+{
+    for (int i = 0; i < numsSize; ++i)
         nums[i] *= nums[i];
-    }
     
-    bool flag = true;
-    while(flag){
-        flag = false;
-        for(int i = 0; i<numsSize; i++){
-            if(i > 0 && nums[i] < nums[i-1]){
-                int temp = nums[i];
-                nums[i] = nums[i-1]; nums[i-1] = temp;
-                flag = true;
-            }
-        }
-    }
+    qsort(nums, numsSize, sizeof(int), comparator);
+    *returnSize = numsSize;
     return nums;
 }

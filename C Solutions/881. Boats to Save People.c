@@ -1,16 +1,30 @@
-int comparator(const void * p1, const void * p2){
-  return(*(int*)p1 - *(int*)p2);
+int 
+comparator (
+    int* a, 
+    int* b)
+{
+  return *a - *b;
 }
 
-int numRescueBoats(int* people, int peopleSize, int limit){
+int 
+numRescueBoats (
+    int* people, 
+    int peopleSize, 
+    int limit)
+{
     qsort(people, peopleSize, sizeof(int), comparator);
-    int min = 0; int max = peopleSize-1; int ans = 0;
-    while(min <= max){
+    int min = 0, ans = 0;
+    int max = peopleSize-1;
+
+    while (min <= max) {
         ans++;
-        if(people[min] + people[max] <= limit){
+        if (people[min] + people[max] <= limit) {
             min++;
             max--;
-        } else { max--; }
+        } else {
+            max--; 
+        }
     }
-    return(ans);
+
+    return ans;
 }
