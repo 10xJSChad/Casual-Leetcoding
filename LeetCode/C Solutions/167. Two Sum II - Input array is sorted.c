@@ -1,4 +1,5 @@
-int* twoSum (
+int* 
+twoSum (
     int* nums,
     int numsSize,
     int target,
