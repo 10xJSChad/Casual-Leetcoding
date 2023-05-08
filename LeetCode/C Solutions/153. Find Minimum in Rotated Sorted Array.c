@@ -1,5 +1,5 @@
 int 
-findMin(
+findMin (
     int* nums, 
     int numsSize)
 {
