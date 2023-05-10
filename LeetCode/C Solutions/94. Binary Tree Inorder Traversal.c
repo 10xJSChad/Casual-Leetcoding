@@ -18,7 +18,7 @@ inorderTraversal(
     if (!root)
         return;
 
-    // the tree will not contain more than 100 nodes
+    // tree will never be larger than 100 nodes
     struct TreeNode** stack = calloc(101, sizeof(struct TreeNode*));
     int* ans = malloc(101 * sizeof(int));
     uint8_t stack_index = 0;
