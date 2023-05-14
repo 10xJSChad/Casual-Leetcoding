@@ -30,9 +30,14 @@ main()
     uint8 digit_surplus = 0;
     
     for (uint8 i = 0; i < MAX_LENGTH; ++i) {
-        digit_surplus = total_surplus > 9 ? RAND_RANGE(1, 4)
-                        : i <= total_surplus ? RAND_RANGE(i, total_surplus)
-                                       : total_surplus;
+        
+        if (total_surplus > 9)
+            digit_surplus = RAND_RANGE(1, 4);
+        else if (i <= total_surplus)
+            digit_surplus = RAND_RANGE(i, total_surplus);
+        else
+            digit_surplus = total_surplus;
+
         total_surplus -= digit_surplus;
         printf("%d", 9 - digit_surplus);
     }
