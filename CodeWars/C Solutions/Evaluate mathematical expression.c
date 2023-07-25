@@ -44,7 +44,6 @@ next_operator(char* from)
 char*
 next_value(char* from)
 {
-
     if (from == NULL)
       return NULL;
 
