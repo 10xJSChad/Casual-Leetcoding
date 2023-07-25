@@ -92,7 +92,7 @@ evaluate(char *expr, char** endptr)
         ++expr;
 
     lval = EXTRACT_VALUE(expr, &expr);
-    op = next_operator(expr);
+    op   = next_operator(expr);
 
     while (op && *op != RPAREN) {
         tail    = next_value(op);
