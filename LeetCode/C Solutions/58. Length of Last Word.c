@@ -1,18 +1,19 @@
-int
-lengthOfLastWord(
-    char* s)
+int 
+lengthOfLastWord(char* s)
 {
-    int prev_space_index = 0;    
-    int i = 0;
+    int curr = 0;
+    int last = 0;
 
-    while (s[++i]) {
-        if (s[i] != ' ') {
-            if (s[i-1] == ' ')
-                prev_space_index = i;
+    do {
+        if (*s == ' ') {
+            if (curr > 0) {
+                last = curr;
+                curr = 0;
+            }
         } else {
-            ++prev_space_index;
+            ++curr;
         }
-    }
+    } while (*(++s));
 
-    return i - prev_space_index;
+    return curr == 0 ? last : curr;
 }
