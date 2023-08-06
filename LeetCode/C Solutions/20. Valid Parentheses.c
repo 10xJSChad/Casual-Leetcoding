@@ -17,7 +17,7 @@ bool
 isValid (char* s)
 {
     int  i = 0;
-    char stack[10000] = { 0, };
+    char stack[10000];
 
     do {
         if (*s == LPAREN || *s == LBRACKET || *s == LBRACE)
