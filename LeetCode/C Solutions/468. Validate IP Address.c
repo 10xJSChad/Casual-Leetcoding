@@ -12,6 +12,7 @@
 #define STATE_IPV4    1
 #define STATE_IPV6    2
 
+
 char*
 validIPAddress(char* queryIP)
 {
