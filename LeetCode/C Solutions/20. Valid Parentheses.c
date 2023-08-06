@@ -40,6 +40,7 @@ isValid (char* s)
                     return false;
                 break;
         }
+        
     } while (*s++);
 
     return i == 0;
