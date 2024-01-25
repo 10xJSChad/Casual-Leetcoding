@@ -1,24 +1,24 @@
 int lengthOfLongestSubstring(char* s) {
-    char letters[256] = {0};
+    bool seen[256] = {0};
     char* left  = s;
     char* right = s;
     
-    int max  = 0;
-    int curr = 0;
+    int max = 0;
+    int len = 0;
 
     while (*right) {
-        if (letters[*right]) {
+        if (seen[*right]) {
             do {
-                letters[*left] = 0;
-                --curr;
+                seen[*left] = false;
+                --len;
             } while (*(left++) != *right);
         }
         
-        letters[*(right++)] = 1;
-        ++curr;
+        seen[*(right++)] = true;
+        ++len;
 
-        if (curr > max)
-            max = curr;
+        if (len > max)
+            max = len;
     }
 
     return max;
