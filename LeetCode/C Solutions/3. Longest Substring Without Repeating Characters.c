@@ -8,19 +8,14 @@ int lengthOfLongestSubstring(char* s) {
 
     while (*right) {
         if (letters[*right]) {
-            while (*left != *right) {
+            do {
                 letters[*left] = 0;
-                ++left;
                 --curr;
-            }
-
-            ++left;
-            --curr;
+            } while (*(left++) != *right);
         }
         
-        letters[*right] = 1;
+        letters[*(right++)] = 1;
         ++curr;
-        ++right;
 
         if (curr > max)
             max = curr;
