@@ -81,7 +81,7 @@ perform_operation(double lval,
 
 
 double
-evaluate(char *expr, char** endptr)
+evaluate(char* expr, char** endptr)
 {
     double lval, rval;
     char   *tail, *head, *op, *next_op;
